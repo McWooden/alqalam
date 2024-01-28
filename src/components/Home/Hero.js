@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+// import { useState, useEffect } from "react";
+// import axios from "axios";
 import heroimg from '../../assets/herobg.webp'
 import PrayerTimes from "./PrayerTimes";
 
