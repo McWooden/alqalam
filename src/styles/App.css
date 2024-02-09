@@ -1,0 +1,3 @@
+.bg-faded {
+    border-image: fill 0 linear-gradient(#0001, #000);
+}

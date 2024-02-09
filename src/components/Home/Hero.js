@@ -5,7 +5,7 @@ import PrayerTimes from "./PrayerTimes";
 
 export default function Hero() {
     return <>
-    <div className="hero" style={{backgroundImage: `url(${heroimg})`}}>
+    <div className="hero bg-faded" style={{backgroundImage: `url(${heroimg})`}}>
         <div className="hero-overlay bg-opacity-60"></div>
         <div className="hero-content text-neutral-content w-full flex flex-col gap-2">
             <div className="w-full">
@@ -58,7 +58,7 @@ export default function Hero() {
 // // Define a component to display the prayer times
 // const PrayerTimes = () => {
 //   // Define the API URL with the city and country parameters
-//   const API_URL = `http://api.aladhan.com/v1/timingsByCity?city=${CITY}&country=${COUNTRY}&method=2`;
+//   const API_URL = `http://api.aladhan.com/v1/timingsByCity?city=$magelang&country=indonesia&method=2`;
 
 //   // Use the custom hook to fetch the data from the API
 //   const { data, loading, error } = useFetch(API_URL);

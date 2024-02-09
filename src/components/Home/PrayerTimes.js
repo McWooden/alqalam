@@ -1,33 +1,142 @@
+import axios from "axios"
+import { useEffect, useState } from "react"
+import { useCallback } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { setPrayerTimes } from "../../redux/prayerTimes"
+// import Countdown from 'react-countdown';
+
 export default function PrayerTimes() {
-    return <div className="stats shadow flex flex-row flex-wrap bg-transparent text-light text-shadow">
-    <div className="stat w-fit text-light">
-        <div className="stat-title text-light text-shadow">Subuh</div>
-        {/* <div className="stat-value">31K</div> */}
-        <div className="stat-desc text-light text-shadow">Jan 1st - Feb 1st</div>
-    </div>
-    
-    <div className="stat w-fit">
-        <div className="stat-title text-light text-shadow">Dzuhur</div>
-        {/* <div className="stat-value">4,200</div> */}
-        <div className="stat-desc text-light text-shadow">↗︎ 400 (22%)</div>
-    </div>
+    const prayerTimes = useSelector(state => state.prayerTimes.data)
 
-    <div className="stat w-fit">
-        <div className="stat-title text-light text-shadow">Ashar</div>
-        {/* <div className="stat-value">4,200</div> */}
-        <div className="stat-desc text-light text-shadow">↗︎ 400 (22%)</div>
-    </div>
+    const dispatch = useDispatch()
 
-    <div className="stat w-fit">
-        <div className="stat-title text-light text-shadow">Maghrib</div>
-        {/* <div className="stat-value">4,200</div> */}
-        <div className="stat-desc text-light text-shadow">↗︎ 400 (22%)</div>
-    </div>
+    const data = [
+        {nama: 'Subuh', key: 'Fajr'},
+        {nama: 'Dzuhur', key: 'Dhuhr'},
+        {nama: 'Ashar', key: 'Asr'},
+        {nama: 'Maghrib', key: 'Maghrib'},
+        {nama: 'Isya', key: 'Isha'},
+    ]
+
+    const fetchData = useCallback(async () => {
+        try {
+            await axios.get('http://api.aladhan.com/v1/timingsByCity?city=magelang&country=indonesia&method=2')
+            .then(res => {
+                dispatch(setPrayerTimes(res.data.data))
+            }).catch(err => {
+                throw new Error(err)
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    },[dispatch])
+
+    const getCurrentTimeInMinutes = () => {
+        const now = new Date();
+        return now.getHours() * 60 + now.getMinutes();
+    }
     
-    <div className="stat w-fit">
-        <div className="stat-title text-light text-shadow">Isya</div>
-        {/* <div className="stat-value">1,200</div> */}
-        <div className="stat-desc text-light text-shadow">↘︎ 90 (14%)</div>
+    const isPastTime = (prayerTime) => {
+        if (!prayerTime) return null
+        const currentTimeInMinutes = getCurrentTimeInMinutes();
+        const [hours, minutes] = prayerTime.split(':').map(Number);
+        const prayerTimeInMinutes = hours * 60 + minutes;
+        return currentTimeInMinutes > prayerTimeInMinutes;
+    }
+    
+
+
+    useEffect(() => {
+        if (!prayerTimes) fetchData()
+    },[fetchData, prayerTimes])
+
+    return <div className="stats w-full flex flex-row flex-wrap bg-transparent text-light text-shadow justify-evenly overflow-x-visible py-8">
+        {data.filter(time => isPastTime(prayerTimes?.timings?.[time.key])).map((time, i) => <PrayerStat time={time} timing={prayerTimes?.timings?.[time.key]} key={i}/>)}
+        {data.filter(time => !isPastTime(prayerTimes?.timings?.[time.key])).map((time, i) => <PrayerStat time={time} timing={prayerTimes?.timings?.[time.key]} highLight={!i} key={i + 'random'} active={true}/>)}
     </div>
-</div>
 }
+
+function PrayerStat({time, className = '', highLight = false, active = false, timing}) {
+
+    return <div className={`stat w-fit text-center basis-1/5 grow rounded items-center ${className} ${highLight ? 'bg-neutral scale-110 shadow-sm' : active ? 'bg-neutral/25 shadow' : 'opacity-75 text-light'}`} key={time.nama}>
+        <div className="stat-title text-light text-shadow">{time.nama}</div>
+        <div className="stat-desc text-light text-shadow">{timing  || '--:--'}</div>
+        {highLight && <MyCountDown timing={timing}/>}
+    </div>
+}
+
+function MyCountDown({ timing = '23:59' }) {
+    const [hours, setHours] = useState(0);
+    const [minutes, setMinutes] = useState(0);
+    const [seconds, setSeconds] = useState(0);
+
+    useEffect(() => {
+        const calculateTimeLeft = () => {
+            const targetTime = new Date();
+            const [targetHours, targetMinutes] = timing.split(':').map(num => parseInt(num));
+            targetTime.setHours(targetHours, targetMinutes, 0, 0);
+
+            const now = new Date();
+            let difference = targetTime - now;
+            if (difference < 0) {
+                difference = 0;
+            }
+
+            const hoursLeft = Math.floor(difference / (1000 * 60 * 60));
+            const minutesLeft = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const secondsLeft = Math.floor((difference % (1000 * 60)) / 1000);
+
+            setHours(hoursLeft);
+            setMinutes(minutesLeft);
+            setSeconds(secondsLeft);
+        };
+
+        const timer = setInterval(calculateTimeLeft, 1000);
+
+        return () => clearInterval(timer);
+    }, [timing]);
+
+    return (
+        <span className="countdown font-mono text-2xl">
+            <span style={{ "--value": hours }}>{hours}</span>:
+            <span style={{ "--value": minutes }}>{minutes}</span>:
+            <span style={{ "--value": seconds }}>{seconds}</span>
+        </span>
+    );
+}
+
+
+
+// function MyCountDown({timing}) {
+//     // const [countDown, setCountDown] = useState(null)
+
+//     // useEffect(() => {
+//     //     const mydate = new Date()
+//     //     const [hours, minutes] = timing?.split(':').map(Number) || [0,0]
+//     //     mydate.setHours(hours)
+//     //     mydate.setMinutes(minutes)
+//     //     setCountDown(new Date(mydate).toISOString())
+//     // },[timing])
+
+//     const renderer = ({ hours, minutes, seconds, completed }) => {
+//         if (completed) {
+//             return <span>Sholat!</span>
+//         } else {
+//             return <span>
+//                 {hours} hours, {minutes} minutes, {seconds} seconds
+//                 {/* <span className="countdown font-mono text-2xl">
+//                     <span style={{"--value":hours}}></span>:
+//                     <span style={{"--value":minutes}}></span>:
+//                     <span style={{"--value":seconds}}></span>
+//                 </span> */}
+//             </span>
+//         }
+// }
+
+//     return <div className="stat-desc text-light text-shadow">
+//         <Countdown
+//             date={Date.now() + 5000}
+//             renderer={renderer}
+//         />,
+//     </div>
+// }
