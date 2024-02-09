@@ -20,7 +20,7 @@ export default function PrayerTimes() {
 
     const fetchData = useCallback(async () => {
         try {
-            await axios.get('http://api.aladhan.com/v1/timingsByCity?city=magelang&country=indonesia&method=2')
+            await axios.get('https://api.aladhan.com/v1/timingsByCity?city=magelang&country=indonesia&method=2')
             .then(res => {
                 dispatch(setPrayerTimes(res.data.data))
             }).catch(err => {
