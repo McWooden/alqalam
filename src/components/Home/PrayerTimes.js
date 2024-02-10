@@ -3,7 +3,6 @@ import { useEffect, useState } from "react"
 import { useCallback } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { setPrayerTimes } from "../../redux/prayerTimes"
-// import Countdown from 'react-countdown';
 
 export default function PrayerTimes() {
     const prayerTimes = useSelector(state => state.prayerTimes.data)
@@ -97,7 +96,7 @@ function MyCountDown({ timing = '23:59' }) {
     }, [timing]);
 
     return (
-        <span className="countdown font-mono text-2xl">
+        <span className="countdown font-mono text-2xl text-center">
             <span style={{ "--value": hours }}>{hours}</span>:
             <span style={{ "--value": minutes }}>{minutes}</span>:
             <span style={{ "--value": seconds }}>{seconds}</span>
@@ -105,38 +104,3 @@ function MyCountDown({ timing = '23:59' }) {
     );
 }
 
-
-
-// function MyCountDown({timing}) {
-//     // const [countDown, setCountDown] = useState(null)
-
-//     // useEffect(() => {
-//     //     const mydate = new Date()
-//     //     const [hours, minutes] = timing?.split(':').map(Number) || [0,0]
-//     //     mydate.setHours(hours)
-//     //     mydate.setMinutes(minutes)
-//     //     setCountDown(new Date(mydate).toISOString())
-//     // },[timing])
-
-//     const renderer = ({ hours, minutes, seconds, completed }) => {
-//         if (completed) {
-//             return <span>Sholat!</span>
-//         } else {
-//             return <span>
-//                 {hours} hours, {minutes} minutes, {seconds} seconds
-//                 {/* <span className="countdown font-mono text-2xl">
-//                     <span style={{"--value":hours}}></span>:
-//                     <span style={{"--value":minutes}}></span>:
-//                     <span style={{"--value":seconds}}></span>
-//                 </span> */}
-//             </span>
-//         }
-// }
-
-//     return <div className="stat-desc text-light text-shadow">
-//         <Countdown
-//             date={Date.now() + 5000}
-//             renderer={renderer}
-//         />,
-//     </div>
-// }

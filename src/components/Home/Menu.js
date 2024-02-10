@@ -1,10 +1,12 @@
 import dictionary from '../../assets/dictionary.png'
 import quran from '../../assets/quran.png'
+import pray from '../../assets/pray.png'
 
 export default function Menu() {
     const data = [
         {source: quran, title: 'Belajar Al-Quran', desc: 'Didukung dengan bahasa isyarat tangan'},
-        {source: dictionary, title: 'Kamus Islam', desc: 'Menjelaskan maksud dari istilah-istilah Islam yang ada'}
+        {source: dictionary, title: 'Kamus Islam', desc: 'Menjelaskan maksud dari istilah-istilah Islam yang ada'},
+        {source: pray, title: 'Doa Dzikir', desc: 'Nikmati beragam doa dzikir yang menyegarkan jiwa dan mendekatkan pada Allah'}
     ]
     return (
         <div className="flex flex-col md:flex-row gap-2 p-2">
