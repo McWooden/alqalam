@@ -10,16 +10,16 @@ export default function Menu() {
     ]
     return (
         <div className="flex flex-col md:flex-row gap-2 p-2">
-            {data.map((item, i) => <div className="card bg-base-100 shadow-xl border-2 border-base-200 w-fit flex-1" key={i}>
-                <figure className="px-10 pt-10">
+            {data.map((item, i) => <div className="flex flex-col gap-2 items-center justify-center bg-base-100 shadow-xl border-2 border-base-200 w-fit flex-1 p-5" key={i}>
+                <figure className="">
                     <img
                         src={item.source}
                         alt="Shoes"
                         className="w-20"
                     />
                 </figure>
-                <div className="card-body items-center text-center">
-                    <h2 className="card-title">{item.title}</h2>
+                <div className="flex flex-col gap-2 items-center text-center">
+                    <h2 className="font-bold">{item.title}</h2>
                     <p>{item.desc}</p>
                 </div>
             </div>)}
