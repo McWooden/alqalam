@@ -4,9 +4,9 @@ import pray from '../../assets/pray.png'
 
 export default function Menu() {
     const data = [
-        {source: quran, title: 'Belajar Al-Quran', desc: 'Didukung dengan bahasa isyarat tangan'},
-        {source: dictionary, title: 'Kamus Islam', desc: 'Menjelaskan maksud dari istilah-istilah Islam yang ada'},
-        {source: pray, title: 'Doa Dzikir', desc: 'Nikmati beragam doa dzikir yang menyegarkan jiwa dan mendekatkan pada Allah'}
+        {source: quran, title: "Belajar Al-Qur'an Isyarat", desc: 'Didukung dengan bahasa isyarat tangan'},
+        {source: dictionary, title: 'Ilmu Pengetahuan Islam', desc: 'Menjelaskan maksud dari istilah-istilah Islam yang ada'},
+        {source: pray, title: 'Zikir harian', desc: 'Nikmati beragam doa dzikir yang menyegarkan jiwa dan mendekatkan pada Allah'}
     ]
     // const data = [
     //     {source: quran, title: 'Belajar Al-Quran', desc: 'Didukung dengan bahasa isyarat tangan'},
