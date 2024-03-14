@@ -15,7 +15,7 @@ export default function Menu() {
     // ]
     return (
         <div className="flex flex-col gap-2 p-2 items-center">
-            <div className="flex gap-2 max-w-md w-full shadow border-2 border-base-200">
+            <div className="flex flex-col gap-2 max-w-[80rem] w-full shadow">
                 {data.map((item, i) => <MenuIcon item={item} key={i}/>)}
             </div>
         </div>
@@ -23,8 +23,8 @@ export default function Menu() {
 }
 
 function MenuIcon({item}) {
-    return <div className="flex flex-col gap-2 items-center justify-center bg-base-100 w-fit flex-1">
-        <figure className="bg-neutral shadow p-2 rounded-full flex-1">
+    return <div className="flex flex-col gap-2 items-center justify-center bg-base-100 w-full flex-1 border-2 border-base-200 shadow p-4">
+        <figure className="flex-1">
             <img
                 src={item.source}
                 alt="Shoes"

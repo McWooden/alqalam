@@ -1,6 +1,6 @@
 export default function Footer() {
-    return (
-        <footer className="footer p-10 bg-neutral text-neutral-content">
+    return <div className="bg-neutral flex justify-center">
+        <footer className="footer p-10 bg-neutral text-neutral-content max-w-[80rem]">
             <aside>
                 <svg
                     width="50"
@@ -37,5 +37,5 @@ export default function Footer() {
                 <a className="link link-hover" href="/">Cookie policy</a>
             </nav>
         </footer>
-    );
+    </div>
 }
