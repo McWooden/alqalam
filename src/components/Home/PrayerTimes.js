@@ -43,8 +43,6 @@ export default function PrayerTimes() {
         const prayerTimeInMinutes = hours * 60 + minutes;
         return currentTimeInMinutes > prayerTimeInMinutes;
     }
-    
-
 
     useEffect(() => {
         if (!prayerTimes) fetchData()
@@ -73,8 +71,8 @@ export default function PrayerTimes() {
 
 function PrayerStat({time, className = '', highLight = false, active = false, timing}) {
     return <div className={`relative stat flex flex-col items-center w-fit text-center basis-1/5 grow rounded ${className} ${highLight ? 'scale-110 shadow-sm' : active ? '' : 'opacity-75'} p-2`} key={time.nama}>
-        <div className="stat-title text-shadow text-light text-sm">{time.nama}</div>
-        <div className={`stat-desc text-shadow text-light ${highLight ? 'font-semibold text-lg' : 'text-xs'}`}>{timing  || '--:--'}</div>
+        <div className="stat-title text-shadow text-light text-[.6rem]">{time.nama}</div>
+        <div className={`stat-desc text-shadow text-light ${highLight ? 'font-semibold text-lg' : 'text-[.5rem]'}`}>{timing  || '--:--'}</div>
         {highLight && <MyCountDown timing={timing} className={'absolute -bottom-1 opacity-90'}/>}
     </div>
 }
@@ -104,10 +102,10 @@ function PrayersList() {
 }
 
 function PrayerList({time, className = '', timing}) {
-    return <div className={`relative flex items-center w-full ${className} p-2`} key={time.nama}>
+    return <div className={`relative flex gap-2 items-center w-full ${className} p-2`} key={time.nama}>
         <div className="flex flex-col flex-1">
-            <div className="text-shadow font-medium text-lg">{time.nama}</div>
-            <div className="text-shadow text-sm">{timing  || '--:--'}</div>
+            <div className="text-shadow font-medium text-sm">{time.nama}</div>
+            <div className="text-shadow text-xs">{timing  || '--:--'}</div>
         </div>
         <MyCountDown timing={timing} className="bg-secondary text-secondary-content p-2"/>
     </div>
