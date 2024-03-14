@@ -21,6 +21,7 @@ export default function PrayerTimes() {
         try {
             await axios.get('https://api.aladhan.com/v1/timingsByCity?city=magelang&country=indonesia&method=2')
             .then(res => {
+                console.log(res.data.data);
                 dispatch(setPrayerTimes(res.data.data))
             }).catch(err => {
                 throw new Error(err)
@@ -54,12 +55,15 @@ export default function PrayerTimes() {
             {data.filter(time => isPastTime(prayerTimes?.timings?.[time.key])).map((time, i) => <PrayerStat time={time} timing={prayerTimes?.timings?.[time.key]} key={i}/>)}
             {data.filter(time => !isPastTime(prayerTimes?.timings?.[time.key])).map((time, i) => <PrayerStat time={time} timing={prayerTimes?.timings?.[time.key]} highLight={!i} key={i + 'random'} active={true}/>)}
         </label>
-        {/* Put this part before </body> tag */}
         <input type="checkbox" id="my_modal_7" className="modal-toggle" />
         <div className="modal z-[1]" role="dialog">
-            <div className="modal-box bg-base-100 text-base-content p-4 rounded shadow max-w-md">
-                <div className="w-full flex flex-col flex-wrap text-shadow justify-evenly">
-                    {data.map((time, i) => <PrayerList time={time} timing={prayerTimes?.timings?.[time.key]} key={i + 'random'}/>)}
+            <div className="modal-box flex flex-col gap-2 text-base-content">
+                <div className="flex flex-col">
+                    <h3 className="text-bold text-2xl">Waktu ibadah</h3>
+                    <p>Menunjukkan waktu ibadah dan acara pada hari ini</p>
+                </div>
+                <div className="flex-1 overflow-auto shadow">
+                    <PrayersList/>
                 </div>
             </div>
             <label className="modal-backdrop" htmlFor="my_modal_7">Close</label>
@@ -69,14 +73,38 @@ export default function PrayerTimes() {
 
 function PrayerStat({time, className = '', highLight = false, active = false, timing}) {
     return <div className={`relative stat flex flex-col items-center w-fit text-center basis-1/5 grow rounded ${className} ${highLight ? 'scale-110 shadow-sm' : active ? '' : 'opacity-75'}`} key={time.nama}>
-            <div className="stat-title text-shadow text-light">{time.nama}</div>
-            <div className="stat-desc text-shadow text-light">{timing  || '--:--'}</div>
+        <div className="stat-title text-shadow text-light">{time.nama}</div>
+        <div className="stat-desc text-shadow text-light">{timing  || '--:--'}</div>
         {highLight && <MyCountDown timing={timing} className={'absolute -bottom-5'}/>}
     </div>
 }
 
+function PrayersList() {
+    const prayerTimes = useSelector(state => state.prayerTimes.data)
+
+    const data = [
+        {nama: 'Sepertiga terakhir', key: 'Lastthird'},
+        {nama: 'Imsak', key: 'Imsak'},
+        {nama: 'Subuh', key: 'Fajr'},
+        {nama: 'Matahari terbit', key: 'Sunrise'},
+        {nama: 'Dzuhur', key: 'Dhuhr'},
+        {nama: 'Ashar', key: 'Asr'},
+        {nama: 'Matahari tenggelam', key: 'Sunset'},
+        {nama: 'Maghrib', key: 'Maghrib'},
+        {nama: 'Isya', key: 'Isha'},
+        {nama: 'Sepertiga pertama', key: 'Firstthird'},
+        {nama: 'Tengah malam', key: 'Midnight'},
+    ]
+
+    return <div className="bg-base-100 text-base-content p-4 rounded shadow max-w-md">
+        <div className="w-full flex flex-col text-shadow">
+            {data?.map((time, i) => <PrayerList time={time} timing={prayerTimes?.timings?.[time.key]} key={i + 'random'}/>) || ''}
+        </div>
+    </div>
+}
+
 function PrayerList({time, className = '', timing}) {
-    return <div className={`relative flex items-center w-full ${className} py-2`} key={time.nama}>
+    return <div className={`relative flex items-center w-full ${className} p-2`} key={time.nama}>
         <div className="flex flex-col flex-1">
             <div className="text-shadow font-medium text-lg">{time.nama}</div>
             <div className="text-shadow text-sm">{timing  || '--:--'}</div>
