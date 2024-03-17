@@ -23,7 +23,7 @@ root.render(
             <Route path='/' Component={Home}/>
             <Route path='app' Component={App}>
               <Route index Component={Menu}/>
-              <Route path='belajar' Component={Belajar}/>
+              <Route path='belajar/*' Component={Belajar}/>
             </Route>
             <Route path='*' element={<ErrorPage/>}/>
         </Routes>
