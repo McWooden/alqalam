@@ -1,13 +1,12 @@
 // import { useState, useEffect } from "react";
 // import axios from "axios";
 import { useEffect, useState } from 'react';
-import heroimg from '../../assets/herobg.webp'
+import heroimg from '../../assets/home/herobg.webp'
 import PrayerTimes from "./PrayerTimes";
 import momentHijri from 'moment-hijri'
 
 export default function Hero() {
-    return <>
-    <div className="hero bg-faded" style={{backgroundImage: `url(${heroimg})`}}>
+    return <div className="hero bg-faded" style={{backgroundImage: `url(${heroimg})`}}>
         <div className="hero-overlay bg-opacity-60"></div>
         <div className="hero-content text-neutral-content w-full flex flex-col gap-2">
             <div className="w-full">
@@ -18,7 +17,6 @@ export default function Hero() {
             <PrayerTimes/>
         </div>
     </div>
-    </>
 }
 function TanggalHijr() {
     const [string, setString] = useState('')

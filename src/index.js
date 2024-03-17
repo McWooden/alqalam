@@ -5,13 +5,31 @@ import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import { store } from './redux/store';import { Provider } from 'react-redux';
+import { Route } from 'react-router-dom';
+import Home from './components/Home/Home';
+import { BrowserRouter, Routes } from 'react-router-dom';
+import ErrorPage from './components/ErrorPage';
+import { ErrorBoundary } from 'react-error-boundary';
+import Belajar from './components/Belajar/Belajar';
+import Menu from './components/Home/Menu';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
+    <ErrorBoundary fallback={<p>Hmmm ada yang salah kata Huddin</p>}>
     <Provider store={store}>
-      <App />
+      <BrowserRouter>
+        <Routes>
+            <Route path='/' Component={Home}/>
+            <Route path='app' Component={App}>
+              <Route index Component={Menu}/>
+              <Route path='belajar' Component={Belajar}/>
+            </Route>
+            <Route path='*' element={<ErrorPage/>}/>
+        </Routes>
+      </BrowserRouter>
     </Provider>
+    </ErrorBoundary>
   // </React.StrictMode>
 );
 

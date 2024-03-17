@@ -13,12 +13,21 @@
 }
 body {
     font-family: var(--default-font);
+    height: 100dvh;
+}
+#root {
+    height: 100dvh;
 }
 .font-montserrat {
     font-family: 'Montserrat', sans-serif;
 }
 /* utility */
-
+.bg-faded {
+    border-image: fill 0 linear-gradient(#0001, #000);
+}
+.height-screen {
+    height: -webkit-fill-available;
+}
 /* kode Tailwind */
 @tailwind base;
 @tailwind components;

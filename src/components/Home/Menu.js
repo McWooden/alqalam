@@ -1,12 +1,13 @@
-import dictionary from '../../assets/dictionary.png'
-import quran from '../../assets/quran.png'
-import pray from '../../assets/pray.png'
+import dictionary from '../../assets/home/dictionary.png'
+import quran from '../../assets/home/quran.png'
+import pray from '../../assets/home/pray.png'
+import { useNavigate } from 'react-router-dom';
 
 export default function Menu() {
     const data = [
-        {source: quran, title: "Belajar Al-Qur'an Isyarat", desc: 'Didukung dengan bahasa isyarat tangan'},
-        {source: dictionary, title: 'Ilmu Pengetahuan Islam', desc: 'Menjelaskan maksud dari istilah-istilah Islam yang ada'},
-        {source: pray, title: 'Zikir harian', desc: 'Nikmati beragam doa dzikir yang menyegarkan jiwa dan mendekatkan pada Allah'}
+        {source: quran, title: "Belajar Al-Qur'an Isyarat", desc: 'Didukung dengan bahasa isyarat tangan', path: '/app/belajar'},
+        {source: dictionary, title: 'Ilmu Pengetahuan Islam', desc: 'Menjelaskan maksud dari istilah-istilah Islam yang ada', path: '/app/ilmu'},
+        {source: pray, title: 'Zikir harian', desc: 'Nikmati beragam doa dzikir yang menyegarkan jiwa dan mendekatkan pada Allah', path: '/app/zikir'}
     ]
     // const data = [
     //     {source: quran, title: 'Belajar Al-Quran', desc: 'Didukung dengan bahasa isyarat tangan'},
@@ -23,7 +24,8 @@ export default function Menu() {
 }
 
 function MenuIcon({item}) {
-    return <div className="flex flex-col gap-2 items-center justify-center bg-base-100 w-full flex-1 border-2 border-base-200 shadow p-4">
+    const navigate = useNavigate()
+    return <div className="flex flex-col gap-2 items-center justify-center bg-base-100 w-full flex-1 border-2 border-base-200 shadow p-4" onClick={() => navigate(item.path)}>
         <figure className="flex-1">
             <img
                 src={item.source}

@@ -72,8 +72,8 @@ export default function PrayerTimes() {
 function PrayerStat({time, className = '', highLight = false, active = false, timing}) {
     return <div className={`relative stat flex flex-col items-center w-fit text-center basis-1/5 grow rounded ${className} ${highLight ? 'scale-110 shadow-sm' : active ? '' : 'opacity-75'} p-2`} key={time.nama}>
         <div className="stat-title text-shadow text-light text-[.6rem]">{time.nama}</div>
-        <div className={`stat-desc text-shadow text-light ${highLight ? 'font-semibold text-lg' : 'text-[.5rem]'}`}>{timing  || '--:--'}</div>
-        {highLight && <MyCountDown timing={timing} className={'absolute -bottom-1 opacity-90'}/>}
+        <div className={`stat-desc text-shadow text-light ${highLight ? 'font-semibold' : 'text-[.5rem]'}`}>{timing  || '--:--'}</div>
+        {highLight && <MyCountDown timing={timing} className={'absolute -bottom-1 opacity-90 text-[.6rem]'}/>}
     </div>
 }
 
@@ -107,7 +107,7 @@ function PrayerList({time, className = '', timing}) {
             <div className="text-shadow font-medium text-sm">{time.nama}</div>
             <div className="text-shadow text-xs">{timing  || '--:--'}</div>
         </div>
-        <MyCountDown timing={timing} className="bg-secondary text-secondary-content p-2"/>
+        <MyCountDown timing={timing} className="bg-secondary text-secondary-content p-2 text-xs"/>
     </div>
 }
 
@@ -142,7 +142,7 @@ function MyCountDown({ timing = '23:59', className = ''}) {
     }, [timing]);
 
     return (
-        <span className={`countdown font-mono text-center rounded shadow text-xs ${className}`}>
+        <span className={`countdown font-mono text-center rounded shadow ${className}`}>
             <span style={{ "--value": hours }}>{hours}</span>:
             <span style={{ "--value": minutes }}>{minutes}</span>:
             <span style={{ "--value": seconds }}>{seconds}</span>
