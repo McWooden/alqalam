@@ -3,7 +3,7 @@ import quran from '../../assets/home/quran.png'
 import pray from '../../assets/home/pray.png'
 import { useNavigate } from 'react-router-dom';
 
-export default function Menu() {
+export default function Features() {
     const data = [
         {source: quran, title: "Belajar Al-Qur'an Isyarat", desc: 'Didukung dengan bahasa isyarat tangan', path: '/app/belajar'},
         {source: dictionary, title: 'Ilmu Pengetahuan Islam', desc: 'Menjelaskan maksud dari istilah-istilah Islam yang ada', path: '/app/ilmu'},

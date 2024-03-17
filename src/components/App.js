@@ -8,6 +8,7 @@ function App() {
   const navigate = useNavigate()
 
   const LastPathDisplay = useCallback(() => {
+    console.log(location);
     const paths = location.pathname.split('/').filter(Boolean) // Split path by '/' and remove empty strings
   
     // Extract the last path
@@ -58,9 +59,9 @@ function App() {
           <img src={alqalam} alt="Alqalam png" className='w-10 drop-shadow'/>
           <p className='text-2xl'>Al-Qalam</p>
         </div>
-        <p className="btn rounded justify-start" onClick={() => navigate('/app/belajar')}>Belajar Al-Qur'an Isyarat</p>
-        <p className="btn rounded justify-start" onClick={() => navigate('/app/ilmu')}>Ilmu pengetahuan islam</p>
-        <p className="btn rounded justify-start" onClick={() => navigate('/app/zikir')}>Zikir harian</p>
+        <p className={`btn rounded justify-start ${location.pathname.startsWith('/app/belajar') && 'btn-neutral'}`} onClick={() => navigate('/app/belajar')}>Belajar Al-Qur'an Isyarat</p>
+        <p className={`btn rounded justify-start ${location.pathname.startsWith('/app/ilmu') && 'btn-neutral'}`} onClick={() => navigate('/app/ilmu')}>Ilmu pengetahuan islam</p>
+        <p className={`btn rounded justify-start ${location.pathname.startsWith('/app/zikir') && 'btn-neutral'}`} onClick={() => navigate('/app/zikir')}>Zikir harian</p>
       </div>
     </div>
   </div>

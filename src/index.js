@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './styles/index.css';
+import './styles/markdown.css';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
@@ -11,7 +12,8 @@ import { BrowserRouter, Routes } from 'react-router-dom';
 import ErrorPage from './components/ErrorPage';
 import { ErrorBoundary } from 'react-error-boundary';
 import Belajar from './components/Belajar/Belajar';
-import Menu from './components/Home/Menu';
+import Features from './components/Home/Features';
+import Ilmu from './components/Ilmu/Ilmu';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -22,8 +24,9 @@ root.render(
         <Routes>
             <Route path='/' Component={Home}/>
             <Route path='app' Component={App}>
-              <Route index Component={Menu}/>
+              <Route index Component={Features}/>
               <Route path='belajar/*' Component={Belajar}/>
+              <Route path='ilmu/*' Component={Ilmu}/>
             </Route>
             <Route path='*' element={<ErrorPage/>}/>
         </Routes>
