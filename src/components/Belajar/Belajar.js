@@ -32,8 +32,8 @@ function MenuBelajar() {
 }
 
 function Pengenalan() {
-    return <div className='flex flex-col'>
-        <p>Belajar Al-Quran didukung dengan bahasa isyarat tangan</p>
+    return <div className='flex flex-col gap-2'>
+        <p>Pengenalan Al-Quran bahasa isyarat</p>
         <div className="max-w-md shadow rounded overflow-hidden">
             <img src={hijaiyahImage} alt="Hijaiyah bahasa isyarat" />
         </div>
