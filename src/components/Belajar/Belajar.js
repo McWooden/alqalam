@@ -15,10 +15,10 @@ export default function Belajar() {
 
 function MenuBelajar() {
     const menuList = [
-        {title: 'Mengenal Huruf Hijaiyah Berisyarat', path: '/app/belajar/pengenalan'},
-        {title: 'Level 1', path: '/'},
-        {title: 'Level 2', path: '/'},
-        {title: 'Level 3', path: '/'},
+        {title: 'Mengenal Huruf Hijaiyah isyarat', path: '/app/belajar/pengenalan'},
+        {title: 'Tingkat 1', path: '/'},
+        {title: 'Tingkat 2', path: '/'},
+        {title: 'Tingkat 3', path: '/'},
     ]
 
     return <Menu title='Belajar Al-Quran Isyarat' items={menuList}/>

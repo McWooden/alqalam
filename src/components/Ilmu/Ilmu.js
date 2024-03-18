@@ -26,5 +26,5 @@ function MenuIlmu() {
         {title: 'Ibadah', path: '/app/ilmu/ibadah'},
         {title: 'Tarikh', path: '/app/ilmu/tarikh'},
     ]
-    return <Menu title='Beragam ilmu pengetahuan Islam' items={menuList}/>
+    return <Menu title='Beragam Ilmu Pengetahuan Islam' items={menuList}/>
 }

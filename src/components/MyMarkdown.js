@@ -13,6 +13,11 @@ export default function MyMarkdown({content}) {
                     className: 'list-decimal pl-8',
                 },
             },
+            hr: {
+                props: {
+                    className: 'my-2',
+                },
+            },
         },
     }
 

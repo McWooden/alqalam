@@ -14,6 +14,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import Belajar from './components/Belajar/Belajar';
 import Features from './components/Home/Features';
 import Ilmu from './components/Ilmu/Ilmu';
+import Zikir from './components/Zikir/Zikir';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -27,6 +28,7 @@ root.render(
               <Route index Component={Features}/>
               <Route path='belajar/*' Component={Belajar}/>
               <Route path='ilmu/*' Component={Ilmu}/>
+              <Route path='zikir/*' Component={Zikir}/>
             </Route>
             <Route path='*' element={<ErrorPage/>}/>
         </Routes>
