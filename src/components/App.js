@@ -21,7 +21,7 @@ function App() {
     LastPathDisplay()
   }, [LastPathDisplay])
   
-  return <div className="drawer height=fill-avaible">
+  return <div className="drawer height-fill-avaible">
     <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
     <div className="drawer-content flex flex-col items-center">
       
