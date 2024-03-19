@@ -21,7 +21,7 @@ function App() {
     LastPathDisplay()
   }, [LastPathDisplay])
   
-  return <div className="drawer">
+  return <div className="drawer height=fill-avaible">
     <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
     <div className="drawer-content flex flex-col items-center">
       
@@ -45,7 +45,7 @@ function App() {
       </div>
       
       {/* outlet */}
-      <div className="max-w-[80rem]">
+      <div className="max-w-[80rem] flex-1">
         <Outlet />
       </div>
 

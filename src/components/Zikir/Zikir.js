@@ -4,7 +4,7 @@ import { Menu } from "../Utils"
 import MyMarkdown from "../MyMarkdown"
 
 export default function Zikir() {
-    return <div className="flex flex-col gap-2 p-2 text-sm">
+    return <div className="flex h-full flex-col gap-2 p-2 text-sm">
         <Routes>
             <Route index Component={MenuZikir}/>
             <Route path="takbir" Component={Takbir}/>
@@ -39,10 +39,8 @@ Allah Maha Besar
 
 Takbir diucapkan dalam berbagai konteks, termasuk saat merayakan hari raya seperti Idul Fitri dan Idul Adha, serta ketika berada di tempat-tempat suci.
     `
-    return <div className="className='flex flex-col gap-2'">
-        <div className="bg-neutral text-neutral-content p-2 rounded text-center">
-            <MyMarkdown content={myContent}/>
-        </div>
+    return <div className="bg-neutral text-neutral-content p-2 rounded text-center mt-auto">
+        <MyMarkdown content={myContent}/>
     </div>
 }
 
@@ -56,10 +54,8 @@ Segala puji bagi Allah Tuhan Semesta Alam
 
 Diucapkan untuk bersyukur kepada Allah
     `
-    return <div className="className='flex flex-col gap-2'">
-        <div className="bg-neutral text-neutral-content p-2 rounded text-center">
-            <MyMarkdown content={myContent}/>
-        </div>
+    return <div className="bg-neutral text-neutral-content p-2 rounded text-center mt-auto">
+        <MyMarkdown content={myContent}/>
     </div>
 }
 
@@ -74,10 +70,8 @@ Tidak ada Tuhan selain Allah.
 
 mengandung makna bahwa hanya Allah yang berhak disembah.
     `
-    return <div className="className='flex flex-col gap-2'">
-        <div className="bg-neutral text-neutral-content p-2 rounded text-center">
-            <MyMarkdown content={myContent}/>
-        </div>
+    return <div className="bg-neutral text-neutral-content p-2 rounded text-center mt-auto">
+        <MyMarkdown content={myContent}/>
     </div>
 }
 
@@ -91,10 +85,8 @@ Maha Suci Allah
 
 Diucapkan untuk mengagungkan kebesaran Allah
     `
-    return <div className="className='flex flex-col gap-2'">
-        <div className="bg-neutral text-neutral-content p-2 rounded text-center">
-            <MyMarkdown content={myContent}/>
-        </div>
+    return <div className="bg-neutral text-neutral-content p-2 rounded text-center mt-auto">
+        <MyMarkdown content={myContent}/>
     </div>
 }
 
@@ -108,9 +100,7 @@ Aku memohon ampun kepada Allah.
 
 Diucapkan untuk memohon ampun kepada Allah
     `
-    return <div className="className='flex flex-col gap-2'">
-        <div className="bg-neutral text-neutral-content p-2 rounded text-center">
-            <MyMarkdown content={myContent}/>
-        </div>
+    return <div className="bg-neutral text-neutral-content p-2 rounded text-center mt-auto">
+        <MyMarkdown content={myContent}/>
     </div>
 }

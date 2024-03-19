@@ -25,7 +25,7 @@ body {
 .bg-faded {
     border-image: fill 0 linear-gradient(#0001, #000);
 }
-.height-screen {
+.height-fill-avaible {
     height: -webkit-fill-available;
 }
 /* kode Tailwind */
