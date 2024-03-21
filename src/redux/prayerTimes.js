@@ -1,17 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getDecryptObjectLocalStorage, setEncryptObjectLocalStorage } from "../utils";
+
+let local = getDecryptObjectLocalStorage('prayerTimes')
+if (local?.period !== new Date().toLocaleDateString()) local = null
 
 const initialState = {
-    data: null,
-    period: null,
+    data: local?.data || null,
+    period: local?.period || null,
 };
+
+console.log('init',initialState);
 
 export const prayerTimes = createSlice({
     name: "prayerTimes",
     initialState,
     reducers: {
         setPrayerTimes: (state, action) => {
-            state.period = new Date().toLocaleDateString();
+            state.period = new Date().toLocaleDateString()
             state.data = action.payload;
+            setEncryptObjectLocalStorage('prayerTimes',{period: state.period, data: state.data})
         },
     },
 });

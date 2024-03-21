@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import heroimg from '../../assets/home/herobg.webp'
 import PrayerTimes from "./PrayerTimes";
 import momentHijri from 'moment-hijri'
+import { namaBulanHijriah } from '../../utils';
 
 export default function Hero() {
     return <div className="hero bg-faded" style={{backgroundImage: `url(${heroimg})`}}>
@@ -20,15 +21,8 @@ export default function Hero() {
 }
 function TanggalHijr() {
     const [string, setString] = useState('')
-
     
     useEffect(() => {
-        const namaBulanHijriah = [
-            'Muharram', 'Safar', 'Rabiul Awal', 'Rabiul Akhir',
-            'Jumadil Awal', 'Jumadil Akhir', 'Rajab', 'Syaban',
-            'Ramadhan', 'Syawal', 'Dzulqaidah', 'Dzulhijjah'
-        ]
-
         const mh = momentHijri();
         const namaHari = new Date().toLocaleDateString('id', {weekday: 'long'})
         const namaBulan = namaBulanHijriah[mh.iMonth()]

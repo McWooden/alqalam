@@ -3,7 +3,7 @@ import MyMarkdown from "../MyMarkdown"
 
 export default function Akidah() {
     const menuList = [
-        {title: 'Tema 1: Rukun Iman', path: '/app/ilmu/akidah/rukunIman'},
+        {title: 'Tema 1: Rukun Iman', path: '/app/ilmu/akidah/rukun-iman'},
     ]
     return <Menu items={menuList}/>
 }

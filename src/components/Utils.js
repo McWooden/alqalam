@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 
 export function Menu({title = '', items = ''}) {
-    return <div className='flex flex-col gap-6'>
+    return <div className='flex flex-col gap-6 w-full max-w-sm'>
     <p className='font-semibold text-xl text-center'>{title}</p>
     <div className='flex flex-col gap-2'>
         {items.map((item, i) => <MenuItem item={item} key={i}/>)}

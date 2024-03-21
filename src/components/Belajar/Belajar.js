@@ -2,12 +2,16 @@ import { Route, Routes } from 'react-router-dom'
 import hijaiyahImage from '../../assets/belajar/IsyaratHijaiyah.png'
 import { Menu } from '../Utils'
 import ErrorPage from '../ErrorPage'
+import EmpetyPage from '../empetyPage'
 
 export default function Belajar() {
-    return <div className="flex flex-col gap-2 p-2 text-sm">
+    return <div className="flex flex-col gap-2 p-2 text-sm items-center">
         <Routes>
             <Route index Component={MenuBelajar}/>
             <Route path='pengenalan' Component={Pengenalan}/>
+            <Route path='1' Component={EmpetyPage}/>
+            <Route path='2' Component={EmpetyPage}/>
+            <Route path='3' Component={EmpetyPage}/>
             <Route path='*' element={<ErrorPage/>}/>
         </Routes>
     </div>

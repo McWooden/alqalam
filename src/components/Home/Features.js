@@ -30,7 +30,8 @@ function MenuIcon({item}) {
             <img
                 src={item.source}
                 alt="Shoes"
-                className="w-8"
+                className="h-8"
+                loading='lazy'
             />
         </figure>
         <div className="flex flex-col gap-2 items-center text-center">

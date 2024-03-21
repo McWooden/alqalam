@@ -1,7 +1,38 @@
+import axios from "axios"
 import CryptoJS from "crypto-js"
+import momentHijri from 'moment-hijri'
 
+// variable
 export const API = process.env.REACT_APP_API
+export const namaBulanHijriah = [
+    'Muharram', 'Safar', 'Rabiul Awal', 'Rabiul Akhir',
+    'Jumadil Awal', 'Jumadil Akhir', 'Rajab', 'Syaban',
+    'Ramadhan', 'Syawal', 'Dzulqaidah', 'Dzulhijjah'
+]
 
+// utils
+export const fetchPrayerTimes = async () => {
+    const data = await axios.get('https://api.aladhan.com/v1/timingsByCity?city=magelang&country=indonesia&method=2')
+    .then(res => {
+        return res.data.data
+    }).catch(err => {
+        throw new Error(err)
+    })
+    return data
+}
+
+export function formatDateToLocaleString(date) {
+    const mh = momentHijri(date)
+    const namaBulan = namaBulanHijriah[mh.iMonth()]
+    const tanggalHijriah = mh.iDate()
+    const tahunHijriah = mh.iYear()
+
+    let hijr = `${tanggalHijriah} ${namaBulan} ${tahunHijriah} H`
+    let masehi = `${new Date(date).getDate()} ${new Date(date).toLocaleDateString('id', {month: 'long'})} ${new Date(date).getFullYear()}`
+    return {hijr, masehi}
+}
+
+// crypto
 function encryptObject(object) {
     const jsonString = JSON.stringify(object)
 
@@ -37,13 +68,17 @@ export function setObjectLocalStorage(key, data) {
 }
 
 export function getObjectLocalStorage(key) {
-    const dataString = localStorage.getItem(key)
-
-    if (dataString) {
-        const data = JSON.parse(dataString)
-        return data
-    } else {
-        return null
+    try {
+        const dataString = localStorage.getItem(key)
+    
+        if (dataString) {
+            const data = JSON.parse(dataString)
+            return data
+        } else {
+            return null
+        }
+    } catch (error) {
+        console.log(error);
     }
 }
 

@@ -4,7 +4,7 @@ import { Menu } from "../Utils"
 import MyMarkdown from "../MyMarkdown"
 
 export default function Zikir() {
-    return <div className="flex h-full flex-col gap-2 p-2 text-sm">
+    return <div className="flex h-full flex-col gap-2 p-2 text-sm items-center">
         <Routes>
             <Route index Component={MenuZikir}/>
             <Route path="takbir" Component={Takbir}/>

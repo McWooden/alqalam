@@ -1,11 +1,16 @@
-import axios from "axios"
 import { useEffect, useState } from "react"
 import { useCallback } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { setPrayerTimes } from "../../redux/prayerTimes"
+import { fetchPrayerTimes, formatDateToLocaleString } from "../../utils"
+import { IoMdRefresh } from "react-icons/io";
+import Loading from "../Loading"
 
 export default function PrayerTimes() {
     const prayerTimes = useSelector(state => state.prayerTimes.data)
+    const period = useSelector(state => state.prayerTimes.period)
+    const [formatDate, setFormatDate] = useState({})
+    const [isLoading, setIsLoading] = useState(false)
 
     const dispatch = useDispatch()
 
@@ -18,18 +23,17 @@ export default function PrayerTimes() {
     ]
 
     const fetchData = useCallback(async () => {
+        if (isLoading) return
+        setIsLoading(true)
         try {
-            await axios.get('https://api.aladhan.com/v1/timingsByCity?city=magelang&country=indonesia&method=2')
-            .then(res => {
-                console.log(res.data.data);
-                dispatch(setPrayerTimes(res.data.data))
-            }).catch(err => {
-                throw new Error(err)
-            })
+            const prayerTimes = await fetchPrayerTimes()
+            dispatch(setPrayerTimes(prayerTimes))
         } catch (error) {
             console.log(error)
+        } finally {
+            setIsLoading(false)
         }
-    },[dispatch])
+    },[dispatch, isLoading])
 
     const getCurrentTimeInMinutes = () => {
         const now = new Date();
@@ -45,6 +49,10 @@ export default function PrayerTimes() {
     }
 
     useEffect(() => {
+        setFormatDate(formatDateToLocaleString(+new Date(period)))
+    },[period])
+
+    useEffect(() => {
         if (!prayerTimes) fetchData()
     },[fetchData, prayerTimes])
 
@@ -57,8 +65,12 @@ export default function PrayerTimes() {
         <div className="modal z-[1]" role="dialog">
             <div className="modal-box flex flex-col gap-2 text-base-content">
                 <div className="flex flex-col">
-                    <h3 className="text-bold text-2xl">Waktu ibadah</h3>
-                    <p>Menunjukkan waktu ibadah dan acara pada hari ini</p>
+                    <div className="flex gap-2 items-center">
+                        <h3 className="flex-1 text-bold text-2xl">Waktu ibadah</h3>
+                        <div className="btn btn-secondary p-2 w-12" onClick={() => fetchData()}>{isLoading ? <Loading className="text-neutral"/> : <IoMdRefresh className="text-xl"/>}</div>
+                    </div>
+                    <p>{formatDate?.hijr}</p>
+                    <p>{formatDate?.masehi}</p>
                 </div>
                 <div className="flex-1 overflow-auto shadow">
                     <PrayersList/>

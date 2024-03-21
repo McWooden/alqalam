@@ -45,7 +45,7 @@ function App() {
       </div>
       
       {/* outlet */}
-      <div className="max-w-[80rem] flex-1">
+      <div className="max-w-[80rem] w-full flex-1">
         <Outlet />
       </div>
 
