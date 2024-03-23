@@ -92,9 +92,13 @@ function SearchList({onClose, isOpen}) {
             <input ref={inputRef} tabIndex={1} type="text" className="grow input input-ghost border-none bg-transparent pl-2 w-full" placeholder="Cari" value={query} onChange={handleInputChange} onKeyDown={handleKeyDown}/>
         </label>
         <div className="flex-1 h-full overflow-auto flex flex-col gap-2">
-            {results.map((item, index) => <div className={`flex flex-col gap-2 p-4 rounded cursor-pointer ${index === selectedResultIndex ? 'bg-neutral text-neutral-content' : 'bg-base-200'}`} key={index} onMouseOver={() => setSelectedResultIndex(index)} onClick={() => navigate(item.path)}>
+            {results.map((item, index) => <div className={`flex flex-col gap-2 p-4 rounded cursor-pointer ${index === selectedResultIndex ? 'bg-neutral text-neutral-content' : 'bg-base-200'}`} key={index} onMouseOver={() => setSelectedResultIndex(index)} onClick={() => {
+                navigate(item.path)
+                setQuery('')
+                onClose()
+            }}>
                 <p className="font-semibold">{item.title}</p>
-                <div className="text-xs flex flex-wrap">{item.path.split('/').filter(Boolean).map((item, index) => <span className='hover:underline cursor-pointer' key={index}>{item}/</span>)}</div>
+                {!item.path.split('/').filter(Boolean).length && <div className="text-xs flex flex-wrap">{item.path.split('/').filter(Boolean).map((item, index) => <span className='hover:underline cursor-pointer' key={index}>{item}/</span>)}</div>}
             </div>)}
         </div>
     </div>
