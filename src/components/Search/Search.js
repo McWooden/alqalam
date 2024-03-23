@@ -89,7 +89,7 @@ function SearchList({onClose, isOpen}) {
     return <div className="modal-box h-full flex flex-col gap-2">
         <label className="input input-bordered flex items-center cursor-text text-neutral-800">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-6 h-6"><path fillRule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clipRule="evenodd" /></svg>
-            <input ref={inputRef} tabIndex={1} type="text" className="grow input input-ghost border-none bg-transparent pl-2" placeholder="Cari" value={query} onChange={handleInputChange} onKeyDown={handleKeyDown}/>
+            <input ref={inputRef} tabIndex={1} type="text" className="grow input input-ghost border-none bg-transparent pl-2 w-full" placeholder="Cari" value={query} onChange={handleInputChange} onKeyDown={handleKeyDown}/>
         </label>
         <div className="flex-1 h-full overflow-auto flex flex-col gap-2">
             {results.map((item, index) => <div className={`flex flex-col gap-2 p-4 rounded cursor-pointer ${index === selectedResultIndex ? 'bg-neutral text-neutral-content' : 'bg-base-200'}`} key={index} onMouseOver={() => setSelectedResultIndex(index)} onClick={() => navigate(item.path)}>
