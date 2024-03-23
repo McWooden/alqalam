@@ -9,8 +9,6 @@ const initialState = {
     period: local?.period || null,
 };
 
-console.log('init',initialState);
-
 export const prayerTimes = createSlice({
     name: "prayerTimes",
     initialState,

@@ -59,7 +59,9 @@ function App() {
           <img src={alqalam} alt="Alqalam png" className='w-10 drop-shadow'/>
           <p className='text-2xl'>Al-Qalam</p>
         </div>
-        <p className={`btn rounded justify-start ${location.pathname.startsWith('/app/belajar') && 'btn-neutral'}`} onClick={() => navigate('/app/belajar')}>Belajar Al-Qur'an Isyarat</p>
+        <div className="flex">
+          <p className={`btn rounded justify-start ${location.pathname.startsWith('/app/belajar') && 'btn-neutral'}`} onClick={() => navigate('/app/belajar')}>Belajar Al-Qur'an Isyarat</p>
+        </div>
         <p className={`btn rounded justify-start ${location.pathname.startsWith('/app/ilmu') && 'btn-neutral'}`} onClick={() => navigate('/app/ilmu')}>Ilmu pengetahuan islam</p>
         <p className={`btn rounded justify-start ${location.pathname.startsWith('/app/zikir') && 'btn-neutral'}`} onClick={() => navigate('/app/zikir')}>Zikir harian</p>
       </div>

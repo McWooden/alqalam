@@ -1,6 +1,8 @@
 import axios from "axios"
 import CryptoJS from "crypto-js"
 import momentHijri from 'moment-hijri'
+import { store } from "./redux/store"
+import { setFetchPrayer } from "./redux/loading"
 
 // variable
 export const API = process.env.REACT_APP_API
@@ -12,11 +14,14 @@ export const namaBulanHijriah = [
 
 // utils
 export const fetchPrayerTimes = async () => {
+    store.dispatch(setFetchPrayer(true))
     const data = await axios.get('https://api.aladhan.com/v1/timingsByCity?city=magelang&country=indonesia&method=2')
     .then(res => {
         return res.data.data
     }).catch(err => {
         throw new Error(err)
+    }).finally(() => {
+        store.dispatch(setFetchPrayer(false))
     })
     return data
 }

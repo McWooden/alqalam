@@ -6,11 +6,12 @@ import { fetchPrayerTimes, formatDateToLocaleString } from "../../utils"
 import { IoMdRefresh } from "react-icons/io";
 import Loading from "../Loading"
 
+
 export default function PrayerTimes() {
     const prayerTimes = useSelector(state => state.prayerTimes.data)
     const period = useSelector(state => state.prayerTimes.period)
     const [formatDate, setFormatDate] = useState({})
-    const [isLoading, setIsLoading] = useState(false)
+    const isFetchLoading = useSelector(state => state.loading.fetchPrayer)
 
     const dispatch = useDispatch()
 
@@ -23,17 +24,14 @@ export default function PrayerTimes() {
     ]
 
     const fetchData = useCallback(async () => {
-        if (isLoading) return
-        setIsLoading(true)
+        if (isFetchLoading) return
         try {
             const prayerTimes = await fetchPrayerTimes()
             dispatch(setPrayerTimes(prayerTimes))
         } catch (error) {
             console.log(error)
-        } finally {
-            setIsLoading(false)
         }
-    },[dispatch, isLoading])
+    },[dispatch, isFetchLoading])
 
     const getCurrentTimeInMinutes = () => {
         const now = new Date();
@@ -67,7 +65,7 @@ export default function PrayerTimes() {
                 <div className="flex flex-col">
                     <div className="flex gap-2 items-center">
                         <h3 className="flex-1 text-bold text-2xl">Waktu ibadah</h3>
-                        <div className="btn btn-secondary p-2 w-12" onClick={() => fetchData()}>{isLoading ? <Loading className="text-neutral"/> : <IoMdRefresh className="text-xl"/>}</div>
+                        <div className="btn btn-secondary p-2 w-12" onClick={() => fetchData()}>{isFetchLoading ? <Loading className="text-neutral"/> : <IoMdRefresh className="text-xl"/>}</div>
                     </div>
                     <p>{formatDate?.hijr}</p>
                     <p>{formatDate?.masehi}</p>

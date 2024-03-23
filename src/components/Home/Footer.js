@@ -1,6 +1,6 @@
 export default function Footer() {
     return <div className="bg-neutral flex justify-center h-full">
-        <footer className="footer p-10 bg-neutral text-neutral-content max-w-[80rem]">
+        <footer className="footer p-10 bg-neutral text-neutral-content max-w-[80rem] h-fit">
             <aside>
                 <svg
                     width="50"
