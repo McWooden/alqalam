@@ -9,7 +9,6 @@ function App() {
   const navigate = useNavigate()
 
   const LastPathDisplay = useCallback(() => {
-    console.log(location);
     const paths = location.pathname.split('/').filter(Boolean) // Split path by '/' and remove empty strings
   
     // Extract the last path
@@ -38,7 +37,7 @@ function App() {
         </div>
         <div className="navbar-center flex-1">
           {/* center content */}
-          <Search text={lastPath} className='text-xl capitalize'/>
+          <Search text={lastPath}/>
         </div>
         <div className="navbar-end hidden">
           {/* end content */}

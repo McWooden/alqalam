@@ -1,26 +1,28 @@
 import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-export default function Search({text = 'Cari', className}) {
+export default function Search({text = 'Cari'}) {
+    const [openSearch, setOpenSearch] = useState(false)
     const closeSearchList = useRef(null)
-    const [count, setCount] = useState(0)
     function handleCloseSearchList() {
         closeSearchList.current.click()
     }
     return <div className="w-full ml-2">
-        <label className="input shadow flex items-center w-full cursor-pointer bg-base-200/50" htmlFor="my_modal_7" onClick={() => setCount(prev => prev + 1)}>
+        <label className="input shadow flex items-center w-full cursor-pointer bg-base-200/50" htmlFor="my_modal_7" onClick={() => {
+            setOpenSearch(true)
+            }}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-5 h-5 text-neutral-500"><path fillRule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clipRule="evenodd" /></svg>
             <div className="pl-2 grow flex items-center text-lg text-neutral-500">{text}</div>
         </label>
         <input type="checkbox" id="my_modal_7" className="modal-toggle" />
         <div className="modal" role="dialog">
-            <SearchList count={count} onClose={handleCloseSearchList}/>
-            <label ref={closeSearchList} className="modal-backdrop" htmlFor="my_modal_7">Close</label>
+            <SearchList onClose={handleCloseSearchList} isOpen={openSearch}/>
+            <label ref={closeSearchList} className="modal-backdrop" htmlFor="my_modal_7" onClick={() => setOpenSearch(false)}>Close</label>
         </div>
     </div>
 }
 
-function SearchList({count, onClose}) {
+function SearchList({onClose, isOpen}) {
     const list = [
         {title: "Al-Qalam (home)", path:'/'},
         {title: "Waktu Sholat (home)", path:'/'},
@@ -43,7 +45,6 @@ function SearchList({count, onClose}) {
             {title: 'Istighfar', path: '/app/zikir/istighfar'},
     ]
 
-    const [amount, setAmount] = useState(count)
     const [query, setQuery] = useState('')
     const [results, setResults] = useState(list)
     const [selectedResultIndex, setSelectedResultIndex] = useState(-1)
@@ -52,13 +53,12 @@ function SearchList({count, onClose}) {
     const inputRef = useRef(null);
 
     useEffect(() => {
-        inputRef.current.focus()
-        setAmount(count)
-    }, [amount, count])
-
-    useEffect(() => {
-        inputRef.current.focus()
-    }, [])
+        if (isOpen) {
+            setTimeout(() => {
+                inputRef.current.focus();
+            }, 1)
+        }
+    }, [isOpen])
 
     const handleKeyDown = (e) => {
         if (e.key === 'ArrowUp') {
@@ -85,14 +85,11 @@ function SearchList({count, onClose}) {
 
         setResults(list.filter(item => item.title.toLowerCase().includes(value.toLowerCase())))
     }
-    
-
-
 
     return <div className="modal-box h-full flex flex-col gap-2">
         <label className="input input-bordered flex items-center cursor-text text-neutral-800">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-6 h-6"><path fillRule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clipRule="evenodd" /></svg>
-            <input ref={inputRef} tabIndex={1} type="text" className="grow input input-ghost border-none bg-transparent pl-2" placeholder="Cari" value={query} onChange={handleInputChange} onKeyDown={handleKeyDown} autoFocus={true}/>
+            <input ref={inputRef} tabIndex={1} type="text" className="grow input input-ghost border-none bg-transparent pl-2" placeholder="Cari" value={query} onChange={handleInputChange} onKeyDown={handleKeyDown}/>
         </label>
         <div className="flex-1 h-full overflow-auto flex flex-col gap-2">
             {results.map((item, index) => <div className={`flex flex-col gap-2 p-4 rounded cursor-pointer ${index === selectedResultIndex ? 'bg-neutral text-neutral-content' : 'bg-base-200'}`} key={index} onMouseOver={() => setSelectedResultIndex(index)} onClick={() => navigate(item.path)}>
@@ -100,6 +97,5 @@ function SearchList({count, onClose}) {
                 <div className="text-xs flex flex-wrap">{item.path.split('/').filter(Boolean).map((item, index) => <span className='hover:underline cursor-pointer' key={index}>{item}/</span>)}</div>
             </div>)}
         </div>
-        
     </div>
 }
