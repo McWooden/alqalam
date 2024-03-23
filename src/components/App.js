@@ -1,6 +1,7 @@
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import alqalam from '../assets/alqalam.png'
 import { useCallback, useEffect, useState } from 'react';
+import Search from './Search/Search';
 
 function App() {
   const [lastPath, setLastPath] = useState('')
@@ -28,18 +29,18 @@ function App() {
       {/* drawer content */}
       {/* nav */}
       <div className="navbar bg-base-100">
-        <div className="navbar-start">
+        <div className="navbar-start w-fit">
           <div className="dropdown">
             <label role="button" className="btn btn-ghost btn-circle drawer-button" htmlFor="my-drawer-4">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
             </label>
           </div>
         </div>
-        <div className="navbar-center">
+        <div className="navbar-center flex-1">
           {/* center content */}
-          <p className="text-xl capitalize">{lastPath}</p>
+          <Search text={lastPath} className='text-xl capitalize'/>
         </div>
-        <div className="navbar-end">
+        <div className="navbar-end hidden">
           {/* end content */}
         </div>
       </div>
@@ -62,8 +63,8 @@ function App() {
         <div className="flex">
           <p className={`btn rounded justify-start ${location.pathname.startsWith('/app/belajar') && 'btn-neutral'}`} onClick={() => navigate('/app/belajar')}>Belajar Al-Qur'an Isyarat</p>
         </div>
-        <p className={`btn rounded justify-start ${location.pathname.startsWith('/app/ilmu') && 'btn-neutral'}`} onClick={() => navigate('/app/ilmu')}>Ilmu pengetahuan islam</p>
-        <p className={`btn rounded justify-start ${location.pathname.startsWith('/app/zikir') && 'btn-neutral'}`} onClick={() => navigate('/app/zikir')}>Zikir harian</p>
+        <p className={`btn rounded justify-start ${location.pathname.startsWith('/app/ilmu') && 'btn-neutral'}`} onClick={() => navigate('/app/ilmu')}>Ilmu Pengetahuan Islam</p>
+        <p className={`btn rounded justify-start ${location.pathname.startsWith('/app/zikir') && 'btn-neutral'}`} onClick={() => navigate('/app/zikir')}>Zikir Harian</p>
       </div>
     </div>
   </div>

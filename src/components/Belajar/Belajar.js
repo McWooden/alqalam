@@ -9,9 +9,9 @@ export default function Belajar() {
         <Routes>
             <Route index Component={MenuBelajar}/>
             <Route path='pengenalan' Component={Pengenalan}/>
-            <Route path='1' Component={EmpetyPage}/>
-            <Route path='2' Component={EmpetyPage}/>
-            <Route path='3' Component={EmpetyPage}/>
+            <Route path='tingkat-1' Component={EmpetyPage}/>
+            <Route path='tingkat-2' Component={EmpetyPage}/>
+            <Route path='tingkat-3' Component={EmpetyPage}/>
             <Route path='*' element={<ErrorPage/>}/>
         </Routes>
     </div>
@@ -20,9 +20,9 @@ export default function Belajar() {
 function MenuBelajar() {
     const menuList = [
         {title: 'Mengenal Huruf Hijaiyah isyarat', path: '/app/belajar/pengenalan'},
-        {title: 'Tingkat 1', path: '/'},
-        {title: 'Tingkat 2', path: '/'},
-        {title: 'Tingkat 3', path: '/'},
+        {title: 'Tingkat 1', path: '/app/belajar/tingkat-1'},
+        {title: 'Tingkat 2', path: '/app/belajar/tingkat-2'},
+        {title: 'Tingkat 3', path: '/app/belajar/tingkat-3'},
     ]
 
     return <Menu title='Belajar Al-Quran Isyarat' items={menuList}/>
