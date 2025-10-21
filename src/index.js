@@ -16,27 +16,31 @@ import Features from './components/Home/Features';
 import Ilmu from './components/Ilmu/Ilmu';
 import Zikir from './components/Zikir/Zikir';
 
+// const root = ReactDOM.createRoot(document.getElementById('root'));
+// root.render(
+//   // <React.StrictMode>
+//     <ErrorBoundary fallback={<p>Hmmm ada yang salah kata Huddin</p>}>
+//     <Provider store={store}>
+//       <BrowserRouter>
+//         <Routes>
+//             <Route path='/' Component={Home}/>
+//             <Route path='app' Component={App}>
+//               <Route index Component={Features}/>
+//               <Route path='belajar/*' Component={Belajar}/>
+//               <Route path='ilmu/*' Component={Ilmu}/>
+//               <Route path='zikir/*' Component={Zikir}/>
+//             </Route>
+//             <Route path='*' element={<ErrorPage/>}/>
+//         </Routes>
+//       </BrowserRouter>
+//     </Provider>
+//     </ErrorBoundary>
+//   // </React.StrictMode>
+// );
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  // <React.StrictMode>
-    <ErrorBoundary fallback={<p>Hmmm ada yang salah kata Huddin</p>}>
-    <Provider store={store}>
-      <BrowserRouter>
-        <Routes>
-            <Route path='/' Component={Home}/>
-            <Route path='app' Component={App}>
-              <Route index Component={Features}/>
-              <Route path='belajar/*' Component={Belajar}/>
-              <Route path='ilmu/*' Component={Ilmu}/>
-              <Route path='zikir/*' Component={Zikir}/>
-            </Route>
-            <Route path='*' element={<ErrorPage/>}/>
-        </Routes>
-      </BrowserRouter>
-    </Provider>
-    </ErrorBoundary>
-  // </React.StrictMode>
-);
+root.render(<div >
+  <h1>web is under maintance since 10/21/2025 11:01</h1>
+</div>);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
